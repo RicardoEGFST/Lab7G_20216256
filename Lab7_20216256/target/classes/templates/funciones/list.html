@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head ></head>
+    <body>
+        <div class="container">
+
+            <h2>Lista de Funciones</h2>
+            <a class="btn btn-primary mt-4 mb-4" th:href="@{'/shipper/new'}">Agregar proyeccion</a>
+            <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Película</th>
+                    <th>Sala</th>
+                    <th>Fecha y hora</th>
+                    <th>Asientos disponibles</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                <tr th:each="funcion, info : ${funciones}">
+                    <td th:text="${info.index + 1}"></td>
+                    <td th:text="${funcion.getObra().getTitle()}"></td>
+                    <td th:text="${funcion.getRoom().getName()}"></td>
+                    <td th:text="${funcion.getFuncionDate()}"></td>
+                    <td th:text="${funcion.getAvailableSeats()}"></td>
+                    <td><a class="btn btn-primary"
+                           th:href="@{'/shipper/edit' + '?id=' + ${funcion.getId()}}">Editar</a>
+                    </td>
+                    <td><a class="btn btn-danger"
+                           th:href="@{'/shipper/delete' + '?id=' + ${funcion.getId()}}">Eliminar</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+    </body>
+</html>
